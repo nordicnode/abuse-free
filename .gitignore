@@ -7,8 +7,11 @@ config.status
 stamp-h1
 libtool
 
-# library
+# build artifacts
+build/
+*.o
 *.a
+bin/
 
 # target files
 abuse

@@ -1,8 +1,0 @@
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/lisp.dir
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/imlib.dir
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/net.dir
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/sdlport.dir
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/abuse.dir
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/abuse-tool.dir
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/edit_cache.dir
-/home/mikey/Desktop/dev/fabs/abuse-free/build/CMakeFiles/rebuild_cache.dir
