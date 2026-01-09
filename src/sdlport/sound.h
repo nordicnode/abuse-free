@@ -11,55 +11,52 @@
 #ifndef __SOUND_H__
 #define __SOUND_H__
 
-#if !defined __CELLOS_LV2__
-#   include <SDL/SDL_mixer.h>
+#ifdef HAVE_SDL_MIXER
+#include <SDL_mixer.h>
 #endif
 
 /* options are passed via command line */
 
-#define SFX_INITIALIZED    1
-#define MUSIC_INITIALIZED  2
+#define SFX_INITIALIZED 1
+#define MUSIC_INITIALIZED 2
 
 int sound_init(int argc, char **argv);
 void sound_uninit();
 void print_sound_options(); // print the options avaible for sound
 
-class sound_effect
-{
+class sound_effect {
 public:
-    sound_effect(char const *filename);
-    ~sound_effect();
+  sound_effect(char const *filename);
+  ~sound_effect();
 
-    void play(int volume = 127, int pitch = 128, int panpot = 128);
+  void play(int volume = 127, int pitch = 128, int panpot = 128);
 
 private:
-#if !defined __CELLOS_LV2__
-    Mix_Chunk* m_chunk;
+#ifdef HAVE_SDL_MIXER
+  Mix_Chunk *m_chunk;
 #endif
 };
 
-class song
-{
+class song {
 public:
-#if !defined __CELLOS_LV2__
-    char const *name() { return Name; }
+#ifdef HAVE_SDL_MIXER
+  char const *name() { return Name; }
 #endif
-    song(char const *filename);
-    void play(unsigned char volume=127);
-    void stop(long fadeout_time=0); // time in ms
-    int playing();
-    void set_volume(int volume);
-    ~song();
+  song(char const *filename);
+  void play(unsigned char volume = 127);
+  void stop(long fadeout_time = 0); // time in ms
+  int playing();
+  void set_volume(int volume);
+  ~song();
 
 private:
-#if !defined __CELLOS_LV2__
-    char *Name;
-    unsigned char *data;
-    unsigned long song_id;
-    Mix_Music* music;
-    SDL_RWops* rw;
+  char *Name;
+  unsigned char *data;
+  unsigned long song_id;
+#ifdef HAVE_SDL_MIXER
+  Mix_Music *music;
+  SDL_RWops *rw;
 #endif
 };
 
 #endif
-

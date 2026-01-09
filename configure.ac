@@ -47,23 +47,16 @@ AC_CHECK_LIB(m, pow, LIBS="$LIBS -lm")
 AC_CHECK_LIB(socket, socket, LIBS="$LIBS -lsocket")
 AC_CHECK_LIB(nsl, gethostbyname, LIBS="$LIBS -lnsl")
 
-dnl Check for SDL
-SDL_VERSION=1.1.6
-AM_PATH_SDL($SDL_VERSION, :,
-    AC_MSG_ERROR([*** SDL version $SDL_VERSION or above not found!]))
-CFLAGS="$CFLAGS $SDL_CFLAGS"
-LIBS="$LIBS $SDL_LIBS $X_LIBS"
+dnl Check for SDL 2
+PKG_CHECK_MODULES([SDL2], [sdl2 >= 2.0.0],
+    [CFLAGS="$CFLAGS $SDL2_CFLAGS"
+     LIBS="$LIBS $SDL2_LIBS"],
+    [AC_MSG_ERROR([*** SDL2 not found!])])
 
-dnl Check for SDL mixer
-ac_cv_my_have_sdl_mixer="no"
-save_CPPFLAGS="${CPPFLAGS}"
-CPPFLAGS="${CPPFLAGS} ${SDL_CFLAGS}"
-AC_CHECK_HEADERS(SDL/SDL_mixer.h, [ac_cv_my_have_sdl_mixer="yes"])
-CPPFLAGS="${save_CPPFLAGS}"
-if test "${ac_cv_my_have_sdl_mixer}" = "no"; then
-  AC_MSG_ERROR([*** SDL_mixer not found!])
-fi
-LIBS="$LIBS -lSDL_mixer"
+dnl Check for SDL2_mixer
+PKG_CHECK_MODULES([SDL2_MIXER], [SDL2_mixer >= 2.0.0],
+    [LIBS="$LIBS $SDL2_MIXER_LIBS"],
+    [AC_MSG_ERROR([*** SDL2_mixer not found!])])
 
 if test "${enable_debug}" = "yes"; then
   AC_DEFINE(HAVE_DEBUG, 1, Define to 1 to activate debug)
